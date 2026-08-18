@@ -4,7 +4,7 @@
 <head>
   <meta charset='UTF-8'/>
   <meta content='width=device-width, initial-scale=1' name='viewport'/>
-  <meta content='Personal portfolio for MD RASEL, creative artist and graphics designer.' name='description'/>
+  <meta content='Personal portfolio for Rasel Hossin, creative artist and graphics designer.' name='description'/>
   <b:include data='blog' name='all-head-content'/>
   <title><data:blog.pageTitle/></title>
   <link href='https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap' rel='stylesheet'/>
@@ -36,6 +36,11 @@ body[data-theme='light']{--bg:#f7efe6;--panel:#fff8ef;--text:#432817;--muted:#80
   <script type='text/javascript'>
 //<![CDATA[
 (function(){var button=document.querySelector('.theme-toggle');if(!button)return;var stored='green';try{stored=localStorage.getItem('md-rasel-theme')||'green'}catch(error){}var current=stored==='light'?'light':'green';document.body.setAttribute('data-theme',current);var replacement=button.cloneNode(true);button.parentNode.replaceChild(replacement,button);replacement.addEventListener('click',function(){current=current==='green'?'light':'green';document.body.setAttribute('data-theme',current);try{localStorage.setItem('md-rasel-theme',current)}catch(error){}})})();
+//]]>
+  </script>
+  <script type='text/javascript'>
+//<![CDATA[
+(function(){var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);var node;while(node=walker.nextNode()){if(node.parentNode&&node.parentNode.tagName!=='SCRIPT'&&node.parentNode.tagName!=='STYLE'){node.nodeValue=node.nodeValue.replace(/MD RASEL/g,'Rasel Hossin')}}}());
 //]]>
   </script>
 </body>

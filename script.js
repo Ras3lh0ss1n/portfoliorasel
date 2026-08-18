@@ -139,13 +139,13 @@ const chatMessages = document.getElementById('chat-messages');
 const defaultPosts = [
   {
     id: 1,
-    author: 'MD RASEL',
+    author: 'Rasel Hossin',
     text: 'Today I am exploring bold colors, expressive layouts, and creative systems that make brands feel unforgettable.',
     date: 'Just now'
   },
   {
     id: 2,
-    author: 'MD RASEL',
+    author: 'Rasel Hossin',
     text: 'New concept in motion: blending illustration, typography, and storytelling into one visual identity.',
     date: '2 hours ago'
   }
@@ -153,6 +153,7 @@ const defaultPosts = [
 
 const STORAGE_KEY = 'md-rasel-posts';
 const OWNER_KEY = 'md-rasel-owner-access';
+const OWNER_PASSWORD = '667565';
 
 const isOwnerAccessEnabled = () => localStorage.getItem(OWNER_KEY) === 'true';
 
@@ -169,11 +170,17 @@ const updateOwnerVisibility = () => {
   }
 
   if (ownerGate) {
-    ownerGate.classList.toggle('hidden', true);
+    ownerGate.classList.toggle('hidden', isOwner);
   }
 
   if (postComposer) {
-    postComposer.classList.toggle('hidden', true);
+    postComposer.classList.toggle('hidden', !isOwner);
+  }
+
+  if (ownerAccessBtn) {
+    ownerAccessBtn.innerHTML = isOwner
+      ? '<span class="button-icon">🔓</span> Lock posting'
+      : '<span class="button-icon">🔒</span> Owner access';
   }
 };
 
@@ -242,7 +249,7 @@ if (postForm && postInput && postList) {
     const posts = getPosts();
     posts.unshift({
       id: Date.now(),
-      author: 'MD RASEL',
+      author: 'Rasel Hossin',
       text,
       date: 'Just now'
     });
@@ -302,8 +309,19 @@ if (chatForm && chatInput && chatMessages) {
 
 if (ownerAccessBtn) {
   ownerAccessBtn.addEventListener('click', () => {
-    const next = !isOwnerAccessEnabled();
-    localStorage.setItem(OWNER_KEY, String(next));
+    if (isOwnerAccessEnabled()) {
+      localStorage.removeItem(OWNER_KEY);
+      updateOwnerVisibility();
+      return;
+    }
+
+    const password = window.prompt('Enter owner password to create a post:');
+    if (password !== OWNER_PASSWORD) {
+      window.alert('Incorrect password.');
+      return;
+    }
+
+    localStorage.setItem(OWNER_KEY, 'true');
     updateOwnerVisibility();
   });
 }
