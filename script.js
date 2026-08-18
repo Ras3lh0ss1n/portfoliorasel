@@ -110,7 +110,7 @@ if (scrollVideo) {
   window.addEventListener('resize', updateScrollProgress);
 
   scrollVideo.addEventListener('error', () => {
-    scrollVideo.style.display = 'none';
+    scrollVideo.classList.add('video-unavailable');
   });
 
   updateScrollProgress();
