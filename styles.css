@@ -1112,6 +1112,13 @@ section {
   border-radius: 26px;
   background: linear-gradient(135deg, rgba(255, 122, 217, 0.12), rgba(101, 231, 255, 0.08), rgba(255, 209, 102, 0.08));
   box-shadow: var(--shadow);
+  min-width: 0;
+  overflow: hidden;
+}
+
+.contact-panel > div,
+.chat-card {
+  min-width: 0;
 }
 
 .contact-panel h2 {
@@ -1139,6 +1146,7 @@ section {
   border-radius: 20px;
   background: rgba(12, 7, 19, 0.4);
   backdrop-filter: blur(8px);
+  max-width: 100%;
 }
 
 .chat-header {
@@ -1547,6 +1555,20 @@ section {
   .contact-actions {
     width: 100%;
     flex-direction: column;
+  }
+
+  .chat-card {
+    width: 100%;
+  }
+
+  .chat-form {
+    flex-direction: column;
+  }
+
+  .chat-form input,
+  .chat-form .button {
+    width: 100%;
+    min-width: 0;
   }
 
   .social-links {
