@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Personal portfolio website for a creative developer and designer."
+    />
+    <title>MD RASEL | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <video id="scroll-video" class="scroll-video" muted playsinline preload="auto" aria-hidden="true">
+      <source src="videos/background.mp4" type="video/mp4" />
+    </video>
+
+    <div class="site-shell">
+      <div class="leaf-field" aria-hidden="true">
+        <span class="leaf leaf-1"></span>
+        <span class="leaf leaf-2"></span>
+        <span class="leaf leaf-3"></span>
+        <span class="leaf leaf-4"></span>
+        <span class="leaf leaf-5"></span>
+        <span class="leaf leaf-6"></span>
+        <span class="leaf leaf-7"></span>
+        <span class="leaf leaf-8"></span>
+        <span class="leaf leaf-9"></span>
+        <span class="leaf leaf-10"></span>
+        <span class="leaf leaf-11"></span>
+        <span class="leaf leaf-12"></span>
+      </div>
+
+      <header class="topbar">
+        <nav class="nav container" aria-label="Main navigation">
+          <a href="#home" class="brand" aria-label="Home">
+            <span class="brand-mark">MR</span>
+            <span class="brand-text">MD RASEL</span>
+          </a>
+
+          <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#work">Work</a>
+            <a href="#posts" class="nav-post-link hidden">Posts</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+          </div>
+
+          <button class="theme-toggle" type="button" aria-label="Toggle theme">
+            <span class="theme-toggle-icon">☀</span>
+          </button>
+          <a class="button button-small" href="#contact"><span class="button-icon">✦</span> Hire me</a>
+        </nav>
+      </header>
+
+      <main>
+        <section id="home" class="hero container">
+          <div class="hero-copy reveal">
+            <p class="eyebrow">Hello, I’m</p>
+            <h1>
+              MD RASEL<br />
+              <span>Creative Artist</span>
+            </h1>
+            <p class="lead">
+              I craft vivid visual stories through branding, illustration, and expressive art direction that turn ideas into unforgettable experiences.
+            </p>
+            <div class="hero-actions">
+              <a class="button" href="#work"><span class="button-icon">▶</span> View projects</a>
+              <a class="button button-secondary" href="#contact"><span class="button-icon">✉</span> Let’s talk</a>
+            </div>
+
+            <ul class="mini-stats" aria-label="Quick stats">
+              <li><strong>5+</strong><span>Years experience</span></li>
+              <li><strong>28</strong><span>Projects shipped</span></li>
+              <li><strong>15</strong><span>Happy clients</span></li>
+            </ul>
+          </div>
+
+          <div class="hero-visual reveal" aria-label="Profile card">
+            <div class="avatar-card">
+              <div class="avatar-glow"></div>
+              <div class="avatar-ring">
+                <div class="avatar-image" aria-label="MD RASEL profile video">
+                  <video
+                    class="avatar-video"
+                    src="videos/profile-video.mp4"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="auto"
+                    aria-label="MD RASEL profile video"
+                  ></video>
+                  <div class="avatar-badge">Available</div>
+                </div>
+              </div>
+              <div class="card-info">
+                <p class="card-label">Currently</p>
+                <h3>Open for freelance projects</h3>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="posts" class="posts container reveal">
+          <div class="owner-gate">
+            <button id="owner-access-btn" type="button" class="button button-secondary"><span class="button-icon">🔒</span> Owner access</button>
+          </div>
+
+          <div id="post-composer" class="post-composer hidden">
+            <form id="post-form" class="post-form">
+              <label class="sr-only" for="post-input">Write a post</label>
+              <textarea id="post-input" maxlength="280" rows="4" placeholder="Write something about your latest idea, work, or creative update..."></textarea>
+
+              <div class="post-form-footer">
+                <span id="post-char-count">0/280</span>
+                <button type="submit" class="button"><span class="button-icon">✎</span> Post</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="section-heading">
+            <p class="eyebrow">Posts</p>
+            <h2>My latest update.</h2>
+          </div>
+
+          <div id="post-list" class="post-list" aria-live="polite"></div>
+        </section>
+
+        <section id="about" class="about container reveal">
+          <div class="section-heading">
+            <p class="eyebrow">About me</p>
+            <h2>Turning ideas into vivid visual stories.</h2>
+          </div>
+
+          <div class="about-grid">
+            <div class="about-text">
+              <p>
+                I’m MD RASEL, a creative artist and graphics designer focused on bold imagery, colorful branding, and expressive visuals that bring personality to every project.
+              </p>
+              <p>
+                I design with joy, motion, and intention—creating visuals that feel energetic, memorable, and deeply connected to the story behind the brand.
+              </p>
+            </div>
+
+            <div class="about-points">
+              <div class="point-card">
+                <span class="point-number">01</span>
+                <div>
+                  <h3>Branding</h3>
+                  <p>Identity systems that make businesses memorable and instantly recognizable.</p>
+                </div>
+              </div>
+              <div class="point-card">
+                <span class="point-number">02</span>
+                <div>
+                  <h3>Creative Design</h3>
+                  <p>Modern, polished visuals with strong composition and storytelling.</p>
+                </div>
+              </div>
+              <div class="point-card">
+                <span class="point-number">03</span>
+                <div>
+                  <h3>Digital Assets</h3>
+                  <p>Social graphics, marketing visuals, and branded materials designed to stand out online.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="work" class="work container reveal">
+          <div class="section-heading split">
+            <div>
+              <p class="eyebrow">Selected work</p>
+              <h2>Recent projects.</h2>
+            </div>
+            <a href="#contact" class="inline-link">Let’s build something</a>
+          </div>
+
+          <div class="project-grid">
+            <article class="project-card">
+              <div class="project-visual visual-one"></div>
+              <div class="project-body">
+                <div class="project-meta">
+                  <span>Branding</span>
+                  <span>2025</span>
+                </div>
+                <h3>North Studio</h3>
+                <p>Crafted a stylish portfolio and branding experience for a creative team focused on growth and visibility.</p>
+                <a href="#" aria-label="View project North Studio">View case study</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-visual visual-two"></div>
+              <div class="project-body">
+                <div class="project-meta">
+                  <span>Product Design</span>
+                  <span>2024</span>
+                </div>
+                <h3>Dashflow</h3>
+                <p>Built a clean productivity dashboard with a user-first structure and a smoother onboarding journey.</p>
+                <a href="#" aria-label="View project Dashflow">View case study</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-visual visual-three"></div>
+              <div class="project-body">
+                <div class="project-meta">
+                  <span>E-commerce</span>
+                  <span>2024</span>
+                </div>
+                <h3>Nova Market</h3>
+                <p>Designed an online storefront experience that improved presentation, trust, and conversion.</p>
+                <a href="#" aria-label="View project Nova Market">View case study</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="skills" class="skills container reveal">
+          <div class="section-heading">
+            <p class="eyebrow">Skills</p>
+            <h2>What I work with.</h2>
+          </div>
+
+          <div class="skills-grid">
+            <div class="skill-card">
+              <h3>Design</h3>
+              <ul>
+                <li>Logo Design</li>
+                <li>Brand Identity</li>
+                <li>Poster Design</li>
+                <li>Social Media Graphics</li>
+              </ul>
+            </div>
+            <div class="skill-card">
+              <h3>Creative Services</h3>
+              <ul>
+                <li>Marketing Design</li>
+                <li>Print Design</li>
+                <li>Packaging Design</li>
+                <li>Visual Storytelling</li>
+              </ul>
+            </div>
+            <div class="skill-card">
+              <h3>Tools</h3>
+              <ul>
+                <li>Adobe Photoshop</li>
+                <li>Adobe Illustrator</li>
+                <li>CorelDRAW</li>
+                <li>Figma</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="experience container reveal">
+          <div class="section-heading">
+            <p class="eyebrow">Experience</p>
+            <h2>Crafting visuals that connect and convert.</h2>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <p class="timeline-period">2023 — Present</p>
+                <h3>Freelance Graphics Designer</h3>
+                <p>Creating modern visual content for brands, businesses, and social media campaigns that need stronger visual impact.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <p class="timeline-period">2021 — 2023</p>
+                <h3>Brand & Visual Designer</h3>
+                <p>Designed identity systems, promotional graphics, and marketing materials for startups and local businesses.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <p class="timeline-period">2019 — 2021</p>
+                <h3>Creative Designer</h3>
+                <p>Produced posters, banners, social posts, and branded visuals for digital and print-based communication.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="experience container reveal">
+          <div class="section-heading">
+            <p class="eyebrow">Connect</p>
+            <h2>Let’s stay in touch.</h2>
+          </div>
+
+          <div class="social-links social-compact" aria-label="Social media links">
+            <a href="https://x.com/ras3lh0ss1n" target="_blank" rel="noreferrer" aria-label="X (Twitter)">
+              <i class="fa-brands fa-x-twitter"></i>
+              <span>X</span>
+            </a>
+            <a href="https://www.facebook.com/raselhossin512" target="_blank" rel="noreferrer" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+              <span>Facebook</span>
+            </a>
+            <a href="https://www.linkedin.com/in/raselhossin/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+              <span>LinkedIn</span>
+            </a>
+            <a href="https://www.instagram.com/ras3l_h0ss1n/" target="_blank" rel="noreferrer" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+              <span>Instagram</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="contributors container reveal">
+          <div class="section-heading">
+            <p class="eyebrow">Contributor profiles</p>
+            <h2>Where my work is published.</h2>
+          </div>
+
+          <div class="contributor-grid">
+            <a href="https://www.flaticon.com/authors/rasel-hossin" target="_blank" rel="noreferrer">
+              <i class="fa-solid fa-wand-sparkles"></i>
+              <span>Flaticon</span>
+            </a>
+            <a href="https://www.magnific.com/author/raselsarker512" target="_blank" rel="noreferrer">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <span>Magnific</span>
+            </a>
+            <a href="https://stock.adobe.com/contributor/211149738/rasel-hossin?load_type=author&prev_url=detail" target="_blank" rel="noreferrer">
+              <i class="fa-regular fa-image"></i>
+              <span>Adobe Stock</span>
+            </a>
+            <a href="https://www.shutterstock.com/g/raselhossin" target="_blank" rel="noreferrer">
+              <i class="fa-solid fa-camera"></i>
+              <span>Shutterstock</span>
+            </a>
+            <a href="http://vecteezy.com/members/112225657232719077895" target="_blank" rel="noreferrer">
+              <i class="fa-solid fa-vector-square"></i>
+              <span>Vecteezy</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="donate container reveal">
+          <div class="donate-card">
+            <div class="donate-copy">
+              <p class="eyebrow">Support</p>
+              <h2>Buy me a coffee</h2>
+              <p>
+                If my work inspires you, a small donation helps me keep creating and building more meaningful visual experiences.
+              </p>
+              <button class="button donate-button" type="button"><span class="button-icon">❤</span> Donate</button>
+            </div>
+
+            <div class="qr-panel" aria-label="Scan to pay QR code">
+              <div class="qr-header">
+                <span class="qr-icon">✦</span>
+                <span>Bangla QR</span>
+              </div>
+              <img src="images/donate-qr.png" alt="Bangla QR payment code" />
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" class="contact container reveal">
+          <div class="contact-panel">
+            <div>
+              <p class="eyebrow">Contact</p>
+              <h2>Let’s create something memorable.</h2>
+              <p>
+                I’m available for logo design, branding projects, social media graphics, and custom creative work.
+              </p>
+
+              <div class="contact-actions">
+                <a class="button" href="mailto:raselhossin.dev@gmail.com"><span class="button-icon">✉</span> raselhossin.dev@gmail.com</a>
+                <a class="button button-secondary" href="https://www.linkedin.com/in/raselhossin/" target="_blank" rel="noreferrer"><span class="button-icon">in</span> LinkedIn</a>
+              </div>
+            </div>
+
+            <div class="chat-card" aria-label="Quick chat widget">
+              <div class="chat-header">
+                <h3>Quick chat</h3>
+                <span class="chat-status">Online</span>
+              </div>
+
+              <div id="chat-messages" class="chat-messages" aria-live="polite">
+                <div class="chat-bubble bubble-bot">Hi! Tell me about your project and I’ll reply soon.</div>
+              </div>
+
+              <form id="chat-form" class="chat-form">
+                <label class="sr-only" for="chat-input">Type your message</label>
+                <input id="chat-input" type="text" maxlength="200" placeholder="Type your message..." required />
+                <button type="submit" class="button"><span class="button-icon">➤</span> Send</button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container footer-inner">
+          <p>© <span id="year"></span> MD RASEL</p>
+          <div class="footer-links">
+            <a href="#about">About</a>
+            <a href="#work">Work</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
