@@ -6,6 +6,22 @@ const revealItems = document.querySelectorAll('.reveal');
 const yearEl = document.getElementById('year');
 const scrollVideo = document.getElementById('scroll-video');
 
+document.addEventListener('contextmenu', (event) => {
+  event.preventDefault();
+});
+
+document.addEventListener('selectstart', (event) => {
+  if (!event.target.closest('input, textarea')) event.preventDefault();
+});
+
+document.addEventListener('copy', (event) => {
+  if (!event.target.closest('input, textarea')) event.preventDefault();
+});
+
+document.addEventListener('cut', (event) => {
+  if (!event.target.closest('input, textarea')) event.preventDefault();
+});
+
 const themeCycle = ['light', 'green'];
 
 const normalizeTheme = (theme) => {
@@ -135,6 +151,20 @@ const ownerGate = document.getElementById('owner-gate');
 const postComposer = document.getElementById('post-composer');
 const navPostLink = document.querySelector('.nav-post-link');
 const postsSection = document.getElementById('posts');
+const projectGrid = document.getElementById('project-grid');
+const projectEditor = document.getElementById('project-editor');
+const projectForm = document.getElementById('project-form');
+const addProjectBtn = document.getElementById('add-project-btn');
+const cancelProjectBtn = document.getElementById('cancel-project-btn');
+const projectIdInput = document.getElementById('project-id');
+const projectCategoryInput = document.getElementById('project-category');
+const projectYearInput = document.getElementById('project-year');
+const projectTitleInput = document.getElementById('project-title');
+const projectDescriptionInput = document.getElementById('project-description');
+const projectLinkInput = document.getElementById('project-link');
+const projectImageInput = document.getElementById('project-image');
+const projectFileInput = document.getElementById('project-file');
+const projectUploadStatus = document.getElementById('project-upload-status');
 const chatForm = document.getElementById('chat-form');
 const chatInput = document.getElementById('chat-input');
 const chatMessages = document.getElementById('chat-messages');
@@ -155,8 +185,39 @@ const defaultPosts = [
 ];
 
 const STORAGE_KEY = 'md-rasel-posts';
+const PROJECTS_KEY = 'md-rasel-projects';
 const OWNER_KEY = 'md-rasel-owner-access';
 const OWNER_PASSWORD = '667565';
+
+const defaultProjects = [
+  {
+    id: 'north-studio',
+    category: 'Branding',
+    year: '2025',
+    title: 'North Studio',
+    description: 'Crafted a stylish portfolio and branding experience for a creative team focused on growth and visibility.',
+    link: '#',
+    visual: 'visual-one'
+  },
+  {
+    id: 'dashflow',
+    category: 'Product Design',
+    year: '2024',
+    title: 'Dashflow',
+    description: 'Built a clean productivity dashboard with a user-first structure and a smoother onboarding journey.',
+    link: '#',
+    visual: 'visual-two'
+  },
+  {
+    id: 'nova-market',
+    category: 'E-commerce',
+    year: '2024',
+    title: 'Nova Market',
+    description: 'Designed an online storefront experience that improved presentation, trust, and conversion.',
+    link: '#',
+    visual: 'visual-three'
+  }
+];
 
 const isOwnerAccessEnabled = () => localStorage.getItem(OWNER_KEY) === 'true';
 
@@ -185,6 +246,12 @@ const updateOwnerVisibility = () => {
       ? '<span class="button-icon">🔓</span> Lock posting'
       : '<span class="button-icon">🔒</span> Owner access';
   }
+
+  if (projectEditor) {
+    projectEditor.classList.toggle('hidden', !isOwner);
+  }
+
+  renderProjects();
 };
 
 const escapeHtml = (value = '') =>
@@ -194,6 +261,82 @@ const escapeHtml = (value = '') =>
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+
+const getProjects = () => {
+  try {
+    const saved = JSON.parse(localStorage.getItem(PROJECTS_KEY));
+    return Array.isArray(saved) ? saved : defaultProjects;
+  } catch (error) {
+    return defaultProjects;
+  }
+};
+
+const saveProjects = (projects) => {
+  localStorage.setItem(PROJECTS_KEY, JSON.stringify(projects));
+};
+
+const resetProjectForm = () => {
+  if (!projectForm) return;
+  projectForm.reset();
+  projectIdInput.value = '';
+  projectUploadStatus.textContent = '';
+  projectEditor.classList.add('hidden');
+};
+
+const openProjectForm = (project = {}) => {
+  projectIdInput.value = project.id || `project-${Date.now()}`;
+  projectCategoryInput.value = project.category || '';
+  projectYearInput.value = project.year || new Date().getFullYear();
+  projectTitleInput.value = project.title || '';
+  projectDescriptionInput.value = project.description || '';
+  projectLinkInput.value = project.link && project.link !== '#' ? project.link : '';
+  projectImageInput.value = '';
+  projectFileInput.value = '';
+  projectUploadStatus.textContent = [
+    project.image ? 'Current image is saved.' : '',
+    project.fileName ? `Current file: ${project.fileName}` : ''
+  ].filter(Boolean).join(' ');
+  projectEditor.classList.remove('hidden');
+  projectTitleInput.focus();
+};
+
+const readFileAsDataUrl = (file) => new Promise((resolve, reject) => {
+  if (!file) {
+    resolve('');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.addEventListener('load', () => resolve(String(reader.result || '')));
+  reader.addEventListener('error', reject);
+  reader.readAsDataURL(file);
+});
+
+const renderProjects = () => {
+  if (!projectGrid) return;
+
+  const isOwner = isOwnerAccessEnabled();
+  projectGrid.innerHTML = getProjects()
+    .map(
+      (project) => `
+        <article class="project-card">
+          <div class="project-visual ${escapeHtml(project.visual || 'visual-one')}"${project.image ? ` style="background-image: url('${escapeHtml(project.image)}')"` : ''}></div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span>${escapeHtml(project.category)}</span>
+              <span>${escapeHtml(project.year)}</span>
+            </div>
+            <h3>${escapeHtml(project.title)}</h3>
+            <p>${escapeHtml(project.description)}</p>
+            <a href="${escapeHtml(project.link || '#')}" aria-label="View project ${escapeHtml(project.title)}">View case study</a>
+            ${project.fileData ? `<a class="project-file-link" href="${escapeHtml(project.fileData)}" download="${escapeHtml(project.fileName || 'project-file')}">Download project file</a>` : ''}
+            ${isOwner ? `<div class="project-owner-actions"><button type="button" class="button button-small edit-project-btn" data-project-id="${escapeHtml(project.id)}">Edit</button><button type="button" class="button button-small button-danger delete-project-btn" data-project-id="${escapeHtml(project.id)}">Delete</button></div>` : ''}
+          </div>
+        </article>
+      `
+    )
+    .join('');
+};
 
 const getPosts = () => {
   try {
@@ -326,6 +469,90 @@ if (ownerAccessBtn) {
 
     localStorage.setItem(OWNER_KEY, 'true');
     updateOwnerVisibility();
+  });
+}
+
+if (projectGrid) {
+  projectGrid.addEventListener('click', (event) => {
+    const button = event.target.closest('button[data-project-id]');
+    if (!button || !isOwnerAccessEnabled()) return;
+
+    const projectId = button.dataset.projectId;
+    const projects = getProjects();
+    const project = projects.find((item) => item.id === projectId);
+
+    if (button.classList.contains('edit-project-btn') && project) {
+      openProjectForm(project);
+    }
+
+    if (button.classList.contains('delete-project-btn')) {
+      saveProjects(projects.filter((item) => item.id !== projectId));
+      renderProjects();
+    }
+  });
+}
+
+if (addProjectBtn) {
+  addProjectBtn.addEventListener('click', () => {
+    if (isOwnerAccessEnabled()) openProjectForm();
+  });
+}
+
+if (cancelProjectBtn) {
+  cancelProjectBtn.addEventListener('click', resetProjectForm);
+}
+
+if (projectForm) {
+  projectForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!isOwnerAccessEnabled()) return;
+
+    const projects = getProjects();
+    const existingProject = projects.find((item) => item.id === projectIdInput.value);
+    const imageFile = projectImageInput.files[0];
+    const projectFile = projectFileInput.files[0];
+
+    if (projectUploadStatus) projectUploadStatus.textContent = 'Preparing uploads...';
+
+    let image = existingProject?.image || '';
+    let fileData = existingProject?.fileData || '';
+    let fileName = existingProject?.fileName || '';
+
+    try {
+      if (imageFile) image = await readFileAsDataUrl(imageFile);
+      if (projectFile) {
+        fileData = await readFileAsDataUrl(projectFile);
+        fileName = projectFile.name;
+      }
+    } catch (error) {
+      window.alert('The selected file could not be read.');
+      return;
+    }
+
+    const project = {
+      id: projectIdInput.value,
+      category: projectCategoryInput.value.trim(),
+      year: projectYearInput.value.trim(),
+      title: projectTitleInput.value.trim(),
+      description: projectDescriptionInput.value.trim(),
+      link: projectLinkInput.value.trim() || '#',
+      visual: existingProject?.visual || 'visual-one',
+      image,
+      fileData,
+      fileName
+    };
+
+    const existingIndex = projects.findIndex((item) => item.id === project.id);
+
+    if (existingIndex >= 0) {
+      projects[existingIndex] = project;
+    } else {
+      projects.push(project);
+    }
+
+    saveProjects(projects);
+    resetProjectForm();
+    renderProjects();
   });
 }
 

@@ -198,46 +198,29 @@
             <a href="#contact" class="inline-link">Let’s build something</a>
           </div>
 
-          <div class="project-grid">
-            <article class="project-card">
-              <div class="project-visual visual-one"></div>
-              <div class="project-body">
-                <div class="project-meta">
-                  <span>Branding</span>
-                  <span>2025</span>
-                </div>
-                <h3>North Studio</h3>
-                <p>Crafted a stylish portfolio and branding experience for a creative team focused on growth and visibility.</p>
-                <a href="#" aria-label="View project North Studio">View case study</a>
+          <div id="project-editor" class="project-editor hidden">
+            <div class="project-editor-header">
+              <h3>Edit projects</h3>
+              <button id="add-project-btn" type="button" class="button button-secondary">Add project</button>
+            </div>
+            <form id="project-form" class="project-form">
+              <input id="project-id" type="hidden" />
+              <label>Category<input id="project-category" type="text" maxlength="40" required /></label>
+              <label>Year<input id="project-year" type="text" maxlength="12" required /></label>
+              <label class="project-form-wide">Title<input id="project-title" type="text" maxlength="80" required /></label>
+              <label class="project-form-wide">Description<textarea id="project-description" maxlength="240" rows="3" required></textarea></label>
+              <label class="project-form-wide">Case study URL<input id="project-link" type="url" placeholder="https://example.com" /></label>
+              <label>Project image<input id="project-image" type="file" accept="image/*" /></label>
+              <label>Project file<input id="project-file" type="file" /></label>
+              <p id="project-upload-status" class="project-upload-status project-form-wide" aria-live="polite"></p>
+              <div class="project-form-actions project-form-wide">
+                <button type="submit" class="button">Save project</button>
+                <button id="cancel-project-btn" type="button" class="button button-secondary">Cancel</button>
               </div>
-            </article>
-
-            <article class="project-card">
-              <div class="project-visual visual-two"></div>
-              <div class="project-body">
-                <div class="project-meta">
-                  <span>Product Design</span>
-                  <span>2024</span>
-                </div>
-                <h3>Dashflow</h3>
-                <p>Built a clean productivity dashboard with a user-first structure and a smoother onboarding journey.</p>
-                <a href="#" aria-label="View project Dashflow">View case study</a>
-              </div>
-            </article>
-
-            <article class="project-card">
-              <div class="project-visual visual-three"></div>
-              <div class="project-body">
-                <div class="project-meta">
-                  <span>E-commerce</span>
-                  <span>2024</span>
-                </div>
-                <h3>Nova Market</h3>
-                <p>Designed an online storefront experience that improved presentation, trust, and conversion.</p>
-                <a href="#" aria-label="View project Nova Market">View case study</a>
-              </div>
-            </article>
+            </form>
           </div>
+
+          <div id="project-grid" class="project-grid"></div>
         </section>
 
         <section id="skills" class="skills container reveal">
