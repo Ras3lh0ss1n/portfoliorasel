@@ -8,19 +8,20 @@ const scrollVideo = document.getElementById('scroll-video');
 
 document.addEventListener('contextmenu', (event) => {
   event.preventDefault();
-});
+  event.stopPropagation();
+}, true);
 
 document.addEventListener('selectstart', (event) => {
-  if (!event.target.closest('input, textarea')) event.preventDefault();
-});
+  if (!event.target.closest('input, textarea, [contenteditable="true"]')) event.preventDefault();
+}, true);
 
 document.addEventListener('copy', (event) => {
-  if (!event.target.closest('input, textarea')) event.preventDefault();
-});
+  if (!event.target.closest('input, textarea, [contenteditable="true"]')) event.preventDefault();
+}, true);
 
 document.addEventListener('cut', (event) => {
-  if (!event.target.closest('input, textarea')) event.preventDefault();
-});
+  if (!event.target.closest('input, textarea, [contenteditable="true"]')) event.preventDefault();
+}, true);
 
 const themeCycle = ['light', 'green'];
 
