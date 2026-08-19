@@ -641,7 +641,7 @@ body[data-theme='green'] .theme-toggle-icon {
   background-size: 300% 100%;
   background-clip: text;
   -webkit-background-clip: text;
-  animation: rainbowShift 18s linear infinite;
+  animation: rainbowShift 18s linear infinite, rgbSpectrum 12s linear infinite;
 }
 
 .hero-copy h1 span {
@@ -655,6 +655,15 @@ body[data-theme='green'] .theme-toggle-icon {
   }
   to {
     background-position: 100% 50%;
+  }
+}
+
+@keyframes rgbSpectrum {
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(360deg);
   }
 }
 
