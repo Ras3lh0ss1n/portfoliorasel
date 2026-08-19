@@ -202,7 +202,7 @@ body::before {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0;
+  opacity: 0.7;
   transition: opacity 0.45s ease;
 }
 
@@ -278,7 +278,7 @@ body[data-theme='green'] .leaf {
   position: absolute;
   border-radius: 50%;
   filter: blur(60px);
-  opacity: 0.7;
+  opacity: 0;
   pointer-events: none;
   z-index: 0;
 }
@@ -622,9 +622,27 @@ body[data-theme='green'] .theme-toggle-icon {
   letter-spacing: -0.06em;
 }
 
+.hero-copy h1 .name-glow {
+  color: transparent;
+  background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet, violet, indigo, blue, green, yellow, orange, red);
+  background-size: 300% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: rainbowShift 18s linear infinite;
+}
+
 .hero-copy h1 span {
   color: var(--tertiary);
   text-shadow: 0 0 18px rgba(101, 231, 255, 0.35);
+}
+
+@keyframes rainbowShift {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
 }
 
 .lead {
@@ -1616,6 +1634,12 @@ section {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .hero-copy h1 .name-glow {
+    animation: none;
+    color: transparent;
+    text-shadow: none;
   }
 
   *,

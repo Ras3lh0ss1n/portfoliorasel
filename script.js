@@ -65,6 +65,8 @@ if (toggle && nav) {
 if (scrollVideo) {
   let rafId = null;
   let scrollProgress = 0;
+  const videoStartTime = 3;
+  const videoEndTime = 22.5;
 
   const updateScrollProgress = () => {
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
@@ -73,11 +75,12 @@ if (scrollVideo) {
 
   const syncVideoToScroll = () => {
     const duration = Number.isFinite(scrollVideo.duration) ? scrollVideo.duration : 0;
-    const usableDuration = duration > 0 ? Math.min(duration, 13) : 0;
+    const startTime = Math.min(videoStartTime, duration);
+    const endTime = Math.min(videoEndTime, Math.max(startTime, duration - 0.02));
 
-    if (usableDuration <= 0) return;
+    if (duration <= 0 || endTime <= startTime) return;
 
-    const targetTime = Math.min(Math.max(scrollProgress * usableDuration, 0), usableDuration - 0.02);
+    const targetTime = startTime + scrollProgress * (endTime - startTime);
     const diff = targetTime - scrollVideo.currentTime;
     const response = 0.55;
 
@@ -98,11 +101,11 @@ if (scrollVideo) {
   scrollVideo.playsInline = true;
   scrollVideo.preload = 'auto';
   scrollVideo.pause();
-  scrollVideo.currentTime = 0;
+  scrollVideo.currentTime = videoStartTime;
 
   scrollVideo.addEventListener('loadedmetadata', () => {
     updateScrollProgress();
-    scrollVideo.currentTime = 0;
+    scrollVideo.currentTime = Math.min(videoStartTime, scrollVideo.duration);
   });
 
   window.addEventListener('scroll', updateScrollProgress, { passive: true });
